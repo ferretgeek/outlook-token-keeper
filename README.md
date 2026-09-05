@@ -1,27 +1,16 @@
-# Outlook 令牌续期
+# Outlook 授权续期工具
 
 中文 · [English](README_EN.md)
 
-[![CI](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/ci.yml/badge.svg)](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/codeql.yml/badge.svg)](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/codeql.yml)
-[![Release](https://img.shields.io/github/v/release/ferretgeek/outlook-token-keeper?style=flat-square&label=%E7%89%88%E6%9C%AC)](https://github.com/ferretgeek/outlook-token-keeper/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-168a70.svg?style=flat-square)](LICENSE)
+定时刷新已授权 Outlook 邮箱的令牌，检查邮箱能否连接，并集中查看失败记录。用于维护账号授权，不读取或展示邮件正文。
+
+适用环境：Python 3.11+；正式部署包含 Web、Worker 和 PostgreSQL，需先取得每个邮箱的 Microsoft OAuth 授权并保持联网。
+
+[在线演示](https://ferretgeek.github.io/outlook-token-keeper/) · [本机预览](#本机预览) · [部署指南](docs/DEPLOYMENT.md)
+
+## 界面
 
 [![界面预览](docs/images/dashboard.png)](https://ferretgeek.github.io/outlook-token-keeper/)
-
-[在线演示](https://ferretgeek.github.io/outlook-token-keeper/) · [部署指南](docs/DEPLOYMENT.md) · [安全策略](SECURITY.md)
-
-> 一批授权过的 Outlook 账号，令牌到期前自动续，并只读验证邮箱还连得上。
-
-## 为什么会需要它
-
-Microsoft 的 OAuth refresh token 不是永久有效的：长期不用会失效，账号侧的一些变动也会让它作废。
-
-如果你只管一两个账号，到期手动点一下就行。如果你管着几十上百个**已获明确授权**的账号，情况就不一样了——你需要知道哪些快到期、哪些已经失效、哪些续成功了但邮箱其实连不上，而且这件事得自动做、崩了能续跑、出错要留痕。
-
-这个工具就是那张时间表：**导入、定时续期、只读体检、异常记录**，全部在你自己的服务器上。
-
-> **请只用它管理你拥有或已获明确授权管理的账号。** 它不采集账号、不提供令牌，也不绕过 Microsoft 的授权、风控或服务条款。
 
 ## 你会看到什么
 

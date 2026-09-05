@@ -2,26 +2,15 @@
 
 [中文](README.md) · English
 
-[![CI](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/ci.yml/badge.svg)](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/codeql.yml/badge.svg)](https://github.com/ferretgeek/outlook-token-keeper/actions/workflows/codeql.yml)
-[![Release](https://img.shields.io/github/v/release/ferretgeek/outlook-token-keeper?style=flat-square)](https://github.com/ferretgeek/outlook-token-keeper/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-168a70.svg?style=flat-square)](LICENSE)
+Refresh authorized Outlook OAuth tokens on a schedule, check whether each mailbox still connects, and review failures in one place. This maintains account authorization without reading or displaying message bodies.
+
+Requirements: Python 3.11+. Production deployment includes web, worker, and PostgreSQL services; obtain Microsoft OAuth authorization for each mailbox first and keep the service connected to the network.
+
+[Live demo](https://ferretgeek.github.io/outlook-token-keeper/) · [Local preview](#local-preview) · [Deployment](docs/DEPLOYMENT_EN.md)
+
+## Interface
 
 [![Interface preview](docs/images/dashboard.png)](https://ferretgeek.github.io/outlook-token-keeper/)
-
-[Live demo](https://ferretgeek.github.io/outlook-token-keeper/) · [Deployment](docs/DEPLOYMENT_EN.md) · [Security policy](SECURITY.md)
-
-> Renew a batch of authorized Outlook OAuth tokens before they expire, and verify read-only that the mailboxes still connect.
-
-## Why this exists
-
-Microsoft OAuth refresh tokens don't last forever: leave one unused long enough and it lapses, and certain account-side changes invalidate it too.
-
-With one or two accounts you just click renew. With dozens or hundreds of **explicitly authorized** accounts it's a different problem — you need to know which are expiring, which already failed, and which renewed successfully but whose mailbox no longer connects. And it has to run on a schedule, resume after a crash, and leave a trail when something goes wrong.
-
-This is that schedule: **import, renew on a timer, health-check read-only, and record exceptions** — all on your own server.
-
-> **Use it only for accounts and tokens you own or are explicitly authorized to administer.** It doesn't harvest accounts, doesn't supply tokens, and doesn't bypass Microsoft's authorization, risk controls, or terms.
 
 ## What you get
 
